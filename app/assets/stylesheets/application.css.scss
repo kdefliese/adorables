@@ -15,8 +15,25 @@
 @import "bootstrap";
 @import "font-awesome";
 
-h1.btn.btn-primary {
-  line-height: 56px;
+body {
+  max-width: 1024px;
   margin: auto;
+}
+
+div.col-md-4 img {
+  width: 325px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+div.col-md-4 {
   padding: none;
+}
+
+.caption {
+  background-color: pink;
+  max-width: 325px;
+  min-height: 50px;
+  margin-bottom: 30px;
 }

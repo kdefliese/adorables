@@ -8,11 +8,15 @@ class LinksController < ApplicationController
   end
 
   def new
-
+    @link = Link.new
+    @title = "Add"
+    @action = "create"
   end
 
   def create
+    Link.create(sale_params)
 
+    redirect_to root_path
   end
 
   def edit
@@ -25,5 +29,11 @@ class LinksController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def sale_params
+    product = params.require(:link).permit(:title, :url)
   end
 end
