@@ -1,10 +1,6 @@
 # require 'uri'
 
 class LinksController < ApplicationController
-  def index
-    @links = Link.all
-  end
-
   def show
 
   end
@@ -18,19 +14,25 @@ class LinksController < ApplicationController
   def create
     if Link.create(link_params).valid?
       Link.last.update(user_id: session[:user_id])
-      
+
       redirect_to root_path
     else
       redirect_to new_link_path, alert: "Invalid image URL."
     end
   end
 
-  def edit
+  def upvote
+    link = Link.find(params[:id])
+    Link.find(link).update(votes: link.votes + 1)
 
+    redirect_to root_path
   end
 
-  def update
+  def downvote
+    link = Link.find(params[:id])
+    Link.find(link).update(votes: link.votes - 1)
 
+    redirect_to root_path
   end
 
   def destroy
