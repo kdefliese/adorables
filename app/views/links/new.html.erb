@@ -6,3 +6,7 @@
   <br>
   <%= f.submit %>
 <% end %>
+
+<% if flash[:alert] %>
+  <%= flash.alert %>
+<% end %>

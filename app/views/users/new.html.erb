@@ -7,17 +7,20 @@
   <% end %>
 <% end %>
 
+<% if flash[:notice] %>
+  <%= flash.notice %>
+<% end %>
+
+<% unless @links.empty? %>
 <div class="row">
-  <% @links.each_with_index do |link, index| %>
-    <%# if index % 4 == 0 %>
-      <!-- </div>
-      <div class="row"> -->
-    <%# end %>
+  <% @links.each do |link| %>
     <div class="col-md-4 col-xs-6">
       <%= link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>
       <div class="caption">
         <%= link.title %>
+        Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
       </div>
     </div>
   <% end %>
 <div>
+<% end %>
