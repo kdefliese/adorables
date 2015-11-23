@@ -23,6 +23,12 @@
         <%= link_to(upvote_link_path(link), method: :patch) { fa_icon("arrow-up") } %>
         <%= link.votes %>
         <%= link_to(downvote_link_path(link), method: :patch) { fa_icon("arrow-down") } %>
+        <%= link_to(new_link_comment_path(link)) { fa_icon("comment") } %>
+        <br>
+        <% link.comments.each do |comment| %>
+          <%= comment.user.name %>: <%= comment.comment %>
+          <br>
+        <% end %>
       </div>
     </div>
   <% end %>

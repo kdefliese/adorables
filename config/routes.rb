@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :links do
     patch "upvote", on: :member
     patch "downvote", on: :member
+    resources :comments
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
