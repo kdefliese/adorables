@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   get "/signout" => "sessions#destroy", :as => :signout
 
   resources :links do
-    patch "upvote", on: :member
-    patch "downvote", on: :member
+    resources :votes do
+      # patch "upvote", on: :collection
+      # patch "downvote", on: :collection
+      patch "heart", on: :collection
+    end
     resources :comments
   end
 

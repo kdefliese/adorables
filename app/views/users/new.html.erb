@@ -20,9 +20,8 @@
         <%= link.title %>
         Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
         <br>
-        <%= link_to(upvote_link_path(link), method: :patch) { fa_icon("arrow-up") } %>
-        <%= link.votes %>
-        <%= link_to(downvote_link_path(link), method: :patch) { fa_icon("arrow-down") } %>
+        <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart") } %>
+        <%= link.total_votes %>
         <%= link_to(new_link_comment_path(link)) { fa_icon("comment") } %>
         <br>
         <% link.comments.each do |comment| %>

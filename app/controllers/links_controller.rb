@@ -21,25 +21,25 @@ class LinksController < ApplicationController
     end
   end
 
-  def upvote
-    unless session[:user_id].nil?
-      link = Link.find(params[:id])
-      Link.find(link).update(votes: link.votes + 1)
-      redirect_to root_path
-    else
-      redirect_to root_path, notice: "Please login."
-    end
-  end
-
-  def downvote
-    unless session[:user_id].nil?
-      link = Link.find(params[:id])
-      Link.find(link).update(votes: link.votes - 1)
-      redirect_to root_path
-    else
-      redirect_to root_path, notice: "Please login."
-    end
-  end
+  # def upvote
+  #   unless session[:user_id].nil?
+  #     link = Link.find(params[:id])
+  #     Link.find(link).update(votes: link.votes + 1)
+  #     redirect_to root_path
+  #   else
+  #     redirect_to root_path, notice: "Please login."
+  #   end
+  # end
+  #
+  # def downvote
+  #   unless session[:user_id].nil?
+  #     link = Link.find(params[:id])
+  #     Link.find(link).update(votes: link.votes - 1)
+  #     redirect_to root_path
+  #   else
+  #     redirect_to root_path, notice: "Please login."
+  #   end
+  # end
 
   def destroy
 
@@ -48,6 +48,6 @@ class LinksController < ApplicationController
   private
 
   def link_params
-    link = params.require(:link).permit(:title, :url)
+    params.require(:link).permit(:title, :url)
   end
 end
