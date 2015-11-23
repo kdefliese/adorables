@@ -1,4 +1,4 @@
-class VotesController < ApplicationController
+ class VotesController < ApplicationController
   def heart
     unless session[:user_id].nil?
       vote = Link.find(params[:link_id]).votes.where(user_id: current_user.id)
@@ -11,7 +11,7 @@ class VotesController < ApplicationController
         Vote.update(vote.first.id, value: 1)
       end
 
-      redirect_to root_path
+      redirect_to links_path
     else
       redirect_to root_path, notice: "Please login."
     end

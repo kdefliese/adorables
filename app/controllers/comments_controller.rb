@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     Comment.create(comment_params)
     Comment.last.update(user_id: session[:user_id])
 
-    redirect_to root_path
+    redirect_to links_path
   end
 
   private

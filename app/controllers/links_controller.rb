@@ -1,8 +1,11 @@
 # require 'uri'
 
 class LinksController < ApplicationController
-  def show
-
+  def index
+    @comment = Comment.new
+    @action = "create"
+    @links = Link.all.sort_by { |link| link.total_votes }.reverse
+    current_user
   end
 
   def new
@@ -15,31 +18,11 @@ class LinksController < ApplicationController
     if Link.create(link_params).valid?
       Link.last.update(user_id: session[:user_id])
 
-      redirect_to root_path
+      redirect_to links_path
     else
       redirect_to new_link_path, alert: "Invalid image URL."
     end
   end
-
-  # def upvote
-  #   unless session[:user_id].nil?
-  #     link = Link.find(params[:id])
-  #     Link.find(link).update(votes: link.votes + 1)
-  #     redirect_to root_path
-  #   else
-  #     redirect_to root_path, notice: "Please login."
-  #   end
-  # end
-  #
-  # def downvote
-  #   unless session[:user_id].nil?
-  #     link = Link.find(params[:id])
-  #     Link.find(link).update(votes: link.votes - 1)
-  #     redirect_to root_path
-  #   else
-  #     redirect_to root_path, notice: "Please login."
-  #   end
-  # end
 
   def destroy
 
