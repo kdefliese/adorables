@@ -22,17 +22,23 @@ class LinksController < ApplicationController
   end
 
   def upvote
-    link = Link.find(params[:id])
-    Link.find(link).update(votes: link.votes + 1)
-
-    redirect_to root_path
+    unless session[:user_id].nil?
+      link = Link.find(params[:id])
+      Link.find(link).update(votes: link.votes + 1)
+      redirect_to root_path
+    else
+      redirect_to root_path, notice: "Please login."
+    end
   end
 
   def downvote
-    link = Link.find(params[:id])
-    Link.find(link).update(votes: link.votes - 1)
-
-    redirect_to root_path
+    unless session[:user_id].nil?
+      link = Link.find(params[:id])
+      Link.find(link).update(votes: link.votes - 1)
+      redirect_to root_path
+    else
+      redirect_to root_path, notice: "Please login."
+    end
   end
 
   def destroy

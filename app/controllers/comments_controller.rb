@@ -1,7 +1,11 @@
 class CommentsController < ApplicationController
   def new
-    @comment = Comment.new
-    @action = "create"
+    unless session[:user_id].nil?
+      @comment = Comment.new
+      @action = "create"
+    else
+      redirect_to root_path, notice: "Please login."
+    end
   end
 
   def create
