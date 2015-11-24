@@ -11,7 +11,7 @@
         Vote.update(vote.first.id, value: 1)
       end
 
-      redirect_to links_path
+      redirect_to links_path(anchor: "link_#{params[:link_id]}")
     else
       redirect_to root_path, notice: "Please login."
     end

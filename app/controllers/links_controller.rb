@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class LinksController < ApplicationController
   before_filter :authenticate, only: [:new]
 
@@ -5,10 +7,15 @@ class LinksController < ApplicationController
     @comment = Comment.new
     @action = "create"
     if params[:sort] == "hearts"
-      @links = Link.all.sort_by { |link| link.total_votes }.reverse
+      links = Link.all.sort_by { |link| link.total_votes }.reverse
+      @links = links.paginate(:page => params[:page], :per_page => 5)
     else
-      @links = Link.all
+      @links = Link.paginate(:page => params[:page], :per_page => 5)
     end
+  end
+
+  def show
+    @link = Link.find(params[:id])
   end
 
   def new
