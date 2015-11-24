@@ -6,24 +6,24 @@
     <div id=<%= "link_#{link.id}" %> class="panel panel-default">
       <div class="panel-title">
         Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
-        <%= link_to(link_path(link), method: :delete) { fa_icon("times") } if link.user_id == session[:user_id] %>
+        <%= link_to(link_path(link), method: :delete, class: "btn pull-right") { fa_icon("times lg") } if link.user_id == session[:user_id] %>
       </div>
       <div class="panel-body">
         <div class="col-sm-12">
           <%# link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>
           <%= image_tag(link.url, class: "img-responsive") %>
           <div class="caption">
+            <div><%= link.total_votes %> hearts</div>
             <% unless session[:user_id].nil? || link.votes.empty? %>
               <% if link.votes.where(user_id: session[:user_id]).first.value == 1 %>
-                <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart") } %>
+                <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart 2x") } %>
               <% else %>
-              <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart-o") } %>
+              <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
               <% end %>
             <% else %>
-              <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart-o") } %>
+              <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
             <% end %>
-            <%= link.total_votes %>
-            <%= link_to(new_link_comment_path(link)) { fa_icon("comment") } %>
+            <%= link_to(new_link_comment_path(link), class: "btn pull-right") { fa_icon("comment 2x") } %>
             <br>
             <% if link.title %>
               <div><%= link.title %></div>
@@ -31,6 +31,7 @@
             <br>
             <% link.comments.each do |comment| %>
               <%= comment.user.name %>: <%= comment.comment %>
+              <br>
             <% end %>
           </div>
         </div>
