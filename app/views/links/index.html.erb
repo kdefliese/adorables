@@ -1,28 +1,32 @@
-<%= link_to "Most Hearted", links_path(sort: "hearts") %>
-<%= link_to "Newest", links_path %>
+<div class="btn btn-group">
+  <%= link_to "Most Hearted", links_path(sort: "hearts") %> &hearts;
+  <%= link_to "Newest", links_path %>
+</div>
 <% unless @links.empty? %>
   <div class="row">
     <% @links.each do |link| %>
     <div id=<%= "link_#{link.id}" %> class="panel panel-default">
-      <div class="panel-title">
-        Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
-        <%= link_to(link_path(link), method: :delete, class: "btn pull-right") { fa_icon("times lg") } if link.user_id == session[:user_id] %>
+      <div class="panel-heading">
+        <h6 class="panel-title">
+          Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
+        </h6>
       </div>
+      <%= link_to(link_path(link), method: :delete, class: "btn pull-right") { fa_icon("times lg") } if link.user_id == session[:user_id] %>
       <div class="panel-body">
         <div class="col-sm-12">
           <%# link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>
           <%= image_tag(link.url, class: "img-responsive") %>
           <div class="caption">
-            <div><%= link.total_votes %> hearts</div>
-            <br>
-            <% if link.title %>
-              <div><%= link.title %></div>
-            <% end %>
-            <br>
-            <% link.comments.each do |comment| %>
-              <%= comment.user.name %>: <%= comment.comment %>
-              <br>
-            <% end %>
+            <div class="comments">
+              <div><%= link.total_votes %> hearts</div>
+              <% if link.title %>
+                <h4><%= link.title %></h4>
+              <% end %>
+              <% link.comments.each do |comment| %>
+                <%= comment.user.name %>: <%= comment.comment %>
+                <br>
+              <% end %>
+            </div>
             <% unless session[:user_id].nil? || link.votes.empty? %>
               <% if link.votes.where(user_id: session[:user_id]).first.value == 1 %>
                 <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart 2x") } %>

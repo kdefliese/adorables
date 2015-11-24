@@ -27,6 +27,11 @@
   margin: auto;
 }
 
+.btn-group {
+  width: 100%;
+  text-align: center;
+}
+
 div.col-sm-12 img {
   width: 100%;
   object-fit: cover;
@@ -37,11 +42,19 @@ div.col-md-4 {
   padding: none;
 }
 
+form.new_link {
+  padding-top: 75px;
+}
+
 .caption {
-  background-color: pink;
+  background-color: rgb(245, 245, 245);
   max-width: 600px;
   min-height: 50px;
   margin-bottom: 30px;
+}
+
+.comments {
+  padding: 20px;
 }
 
 .pagination {
@@ -50,8 +63,8 @@ div.col-md-4 {
   font-size: 20px;
 }
 
-input[type="text"] {
-  width: 85%;
+.new_comment input[type="text"] {
+  width: 82%;
   padding-top: 15px;
   margin-bottom: 15px;
   border: none;
