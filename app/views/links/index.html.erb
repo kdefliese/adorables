@@ -3,33 +3,38 @@
 <% unless @links.empty? %>
   <div class="row">
     <% @links.each do |link| %>
-      <div class="col-sm-12">
-        <%= link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>
-        <div class="caption">
-          <% unless session[:user_id].nil? || link.votes.empty? %>
-            <% if link.votes.where(user_id: session[:user_id]).first.value == 1 %>
-              <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart") } %>
+    <div class="panel panel-default">
+      <div class="panel-title">
+        Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
+        <%= link_to(link_path(link), method: :delete) { fa_icon("times") } if link.user_id == session[:user_id] %>
+      </div>
+      <div class="panel-body">
+        <div class="col-sm-12">
+          <%= link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>
+          <div class="caption">
+            <% unless session[:user_id].nil? || link.votes.empty? %>
+              <% if link.votes.where(user_id: session[:user_id]).first.value == 1 %>
+                <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart") } %>
+              <% else %>
+              <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart-o") } %>
+              <% end %>
             <% else %>
-            <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart-o") } %>
+              <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart-o") } %>
             <% end %>
-          <% else %>
-            <%= link_to(heart_link_votes_path(link), method: :patch) { fa_icon("heart-o") } %>
-          <% end %>
-          <%= link.total_votes %>
-          <%= link_to(new_link_comment_path(link)) { fa_icon("comment") } %>
-          <%= link_to(link_path(link), method: :delete) { fa_icon("times") } if link.user_id == session[:user_id] %>
-          <br>
-          <% if link.title %>
-            <div><%= link.title %></div>
-          <% end %>
-          Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
-          <br>
-          <% link.comments.each do |comment| %>
-            <%= comment.user.name %>: <%= comment.comment %>
+            <%= link.total_votes %>
+            <%= link_to(new_link_comment_path(link)) { fa_icon("comment") } %>
             <br>
-          <% end %>
+            <% if link.title %>
+              <div><%= link.title %></div>
+            <% end %>
+            <br>
+            <% link.comments.each do |comment| %>
+              <%= comment.user.name %>: <%= comment.comment %>
+            <% end %>
+          </div>
         </div>
       </div>
+    </div>
     <% end %>
   <div>
 <% end %>
