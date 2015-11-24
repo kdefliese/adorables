@@ -1,11 +1,14 @@
-# require 'uri'
-
 class LinksController < ApplicationController
+  before_filter :authenticate, only: [:new]
+
   def index
     @comment = Comment.new
     @action = "create"
-    @links = Link.all.sort_by { |link| link.total_votes }.reverse
-    current_user
+    if params[:sort] == "hearts"
+      @links = Link.all.sort_by { |link| link.total_votes }.reverse
+    else
+      @links = Link.all
+    end
   end
 
   def new
@@ -25,12 +28,19 @@ class LinksController < ApplicationController
   end
 
   def destroy
+    link = Link.find(params[:id])
+    link.destroy
 
+    redirect_to links_path
   end
 
   private
 
   def link_params
     params.require(:link).permit(:title, :url)
+  end
+
+  def authenticate
+    redirect_to root_url, notice: "Please login." if current_user.nil?
   end
 end

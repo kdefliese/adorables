@@ -16,13 +16,12 @@
 @import "font-awesome";
 
 body {
-  max-width: 1024px;
+  max-width: 600px;
   margin: auto;
 }
 
-div.col-md-4 img {
-  width: 325px;
-  height: 300px;
+div.col-sm-12 img {
+  width: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -33,7 +32,7 @@ div.col-md-4 {
 
 .caption {
   background-color: pink;
-  max-width: 325px;
+  max-width: 600px;
   min-height: 50px;
   margin-bottom: 30px;
 }
