@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate, only: [:create]
+
   def new
     unless session[:user_id].nil?
       @comment = Comment.new
@@ -20,5 +22,9 @@ class CommentsController < ApplicationController
   def comment_params
     comment = params.require(:comment).permit(:comment)
     comment.merge(params.permit(:link_id))
+  end
+
+  def authenticate
+    redirect_to root_url, notice: "Please login." if current_user.nil?
   end
 end
