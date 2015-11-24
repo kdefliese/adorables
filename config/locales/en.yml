@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  will_paginate:
+    previous_label: <i class="fa fa-arrow-left fa-lg"></i>
+    next_label: <i class="fa fa-arrow-right fa-lg"></i>
