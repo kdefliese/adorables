@@ -9,8 +9,8 @@
       <div class="panel-heading">
         <h6 class="panel-title">
           Submitted <%= time_ago_in_words(link.created_at) %> ago
-          <% unless link.user.name.nil? %>
-            by <%= link.user.name %>
+          <% unless link.user.name.nil? || link.user.nickname.nil? %>
+            by <%= link.user.name || link.user.nickname %>
           <% end %>
         </h6>
       </div>
