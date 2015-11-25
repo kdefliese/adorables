@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
   has_many :comments
   has_many :votes
 
-  validates :url, format: {with: /\.(png|jpg|gif)\Z/i}
+  validates :url, format: {with: /\.(png|jpg|gif|jpeg)\Z/i}
 
   def total_votes
     self.votes.inject(0) { |sum, vote| sum + vote.value }
