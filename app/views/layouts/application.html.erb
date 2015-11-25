@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'cat-favicon.png' %>
 </head>
 <body>
   <%= render 'layouts/header' unless @disable_nav %>
@@ -13,7 +14,7 @@
     <div class="container-fluid">
 
     <%= yield %>
-    
+
     </div>
   </div>
 </body>
