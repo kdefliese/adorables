@@ -10,7 +10,8 @@ class LinksController < ApplicationController
       links = Link.all.sort_by { |link| link.total_votes }.reverse
       @links = links.paginate(:page => params[:page], :per_page => 5)
     else
-      @links = Link.paginate(:page => params[:page], :per_page => 5)
+      links = Link.all.reverse
+      @links = links.paginate(:page => params[:page], :per_page => 5)
     end
   end
 
