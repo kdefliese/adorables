@@ -30,10 +30,10 @@
                 <h4><%= link.title %></h4>
               <% end %>
               <% link.comments.each do |comment| %>
-                <% if !link.user.name.nil? %>
-                  <%= link.user.name %>:
-                <% elsif !link.user.nickname.nil? %>
-                  <%= link.user.nickname %>:
+                <% if !comment.user.name.nil? %>
+                  <%= comment.user.name %>:
+                <% elsif !comment.user.nickname.nil? %>
+                  <%= comment.user.nickname %>:
                 <% else %>
                   Anonymous:
                 <% end %>
