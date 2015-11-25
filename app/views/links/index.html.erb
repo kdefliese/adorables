@@ -28,10 +28,12 @@
               <% end %>
             </div>
             <% unless session[:user_id].nil? || link.votes.empty? %>
-              <% if link.votes.where(user_id: session[:user_id]).first.value == 1 %>
-                <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart 2x") } %>
-              <% else %>
-              <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
+              <% unless link.votes.where(user_id: session[:user_id]).empty? %>
+                <% if link.votes.where(user_id: session[:user_id]).first.value == 1 %>
+                  <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart 2x") } %>
+                <% else %>
+                  <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
+                <% end %>
               <% end %>
             <% else %>
               <%= link_to(heart_link_votes_path(link), method: :patch, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
