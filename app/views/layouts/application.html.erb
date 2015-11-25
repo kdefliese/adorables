@@ -7,15 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'layouts/header' unless @disable_nav %>  
+  <%= render 'layouts/header' unless @disable_nav %>
 
   <div class="wrapper">
     <div class="container-fluid">
-      <% if flash[:notice] %>
-        <%= flash.notice %>
-      <% end %>
 
     <%= yield %>
+    
     </div>
   </div>
 </body>

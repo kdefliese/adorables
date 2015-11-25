@@ -18,12 +18,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="navbar-text">
           <%= "#{current_user.name}" if current_user %>
+          <% if flash[:notice] %>
+          <div class="flash">
+            <%= flash.notice %>
+          </div>
+          <% end %>
         </li>
         <li>
           <% if current_user %>
             <%= link_to "LOGOUT", signout_path %>
           <% else %>
-            <%= link_to "SIGN IN", root_path %>
+            <%= link_to "/auth/github" do %>
+              <%= fa_icon("github lg") %> LOG IN WITH GITHUB
+            <% end %>
           <% end %>
         </li>
       </ul>
