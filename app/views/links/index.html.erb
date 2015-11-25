@@ -9,8 +9,10 @@
       <div class="panel-heading">
         <h6 class="panel-title">
           Submitted <%= time_ago_in_words(link.created_at) %> ago
-          <% unless link.user.nickname.nil? %>
-            by <%= link.user.nickname %>
+          <% if !current_user.name.nil? %>
+            by <%= current_user.name %>
+          <% elsif !current_user.nickname.nil? %>
+            by <%= current_user.nickname %>
           <% else %>
             by Anonymous
           <% end %>
@@ -28,8 +30,10 @@
                 <h4><%= link.title %></h4>
               <% end %>
               <% link.comments.each do |comment| %>
-                <% unless link.user.nickname.nil? %>
-                  <%= comment.user.nickname %>:
+                <% if !current_user.name.nil? %>
+                  <%= current_user.name %>:
+                <% elsif !current_user.nickname.nil? %>
+                  <%= current_user.nickname %>:
                 <% else %>
                   Anonymous:
                 <% end %>
