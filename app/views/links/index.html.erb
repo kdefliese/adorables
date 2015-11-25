@@ -8,7 +8,10 @@
     <div id=<%= "link_#{link.id}" %> class="panel panel-default">
       <div class="panel-heading">
         <h6 class="panel-title">
-          Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.name %>
+          Submitted <%= time_ago_in_words(link.created_at) %> ago
+          <% unless link.user.name.nil? %>
+            by <%= link.user.name %>
+          <% end %>
         </h6>
       </div>
       <%= button_to(link_path(link), method: "delete", onclick: "return confirm('Are you sure?')", title: "Delete", class: "btn pull-right") { fa_icon("times lg") } if link.user_id == session[:user_id] %>
