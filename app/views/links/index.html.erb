@@ -14,7 +14,7 @@
           <% end %>
         </h6>
       </div>
-      <%= button_to(link_path(link), method: "delete", onclick: "return confirm('Are you sure?')", title: "Delete", class: "btn pull-right") { fa_icon("times lg") } if link.user_id == session[:user_id] %>
+      <%= link_to(edit_link_path(link), title: "Edit", class: "btn pull-right") { fa_icon("pencil-square-o lg") } if link.user_id == session[:user_id] %>
       <div class="panel-body">
         <div class="col-sm-12">
           <%# link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>

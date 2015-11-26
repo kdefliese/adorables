@@ -4,11 +4,11 @@
   <%= f.text_field :title, class: "form-control" %>
   <%= f.label :url, "URL" %>
   <%= f.url_field :url, required: true, class: "form-control" %>
+  <% if flash[:alert] %>
+    <%= flash.alert %>
+  <% end %>
   <br>
-  <%= f.submit "Add Link", class: "btn btn-primary" %>
+  <%= f.submit @what + " Link", class: "btn btn-primary" %>
 <% end %>
+<%= button_to("Delete Link", link_path(@link), method: "delete", onclick: "return confirm('Are you sure?')", title: "Delete", class: "btn btn-primary") if !@link.id.nil? %>
 </fieldset>
-
-<% if flash[:alert] %>
-  <%= flash.alert %>
-<% end %>

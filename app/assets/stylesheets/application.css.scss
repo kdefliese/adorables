@@ -36,8 +36,8 @@
   text-align: center;
 }
 
-button {
-  background-color: transparent;
+.button_to {
+  display: inline-block;
 }
 
 div.col-sm-12 img {
@@ -50,7 +50,7 @@ div.col-md-4 {
   padding: none;
 }
 
-form.new_link {
+form.new_link, form.edit_link {
   padding-top: 75px;
 }
 

@@ -1,14 +1,14 @@
 require 'will_paginate/array'
 
 class LinksController < ApplicationController
-  before_filter :authenticate, only: [:new]
+  before_filter :authenticate, only: [:new, :edit]
 
   def index
     ## for comment form
     @comment = Comment.new
     @action = "create"
     ##
-    
+
     if params[:sort] == "hearts"
       links = Link.all.sort_by { |link| link.total_votes }.reverse
       @links = links.paginate(:page => params[:page], :per_page => 5)
@@ -24,8 +24,8 @@ class LinksController < ApplicationController
 
   def new
     @link = Link.new
-    @title = "Add"
     @action = "create"
+    @what = "Add"
   end
 
   def create
@@ -34,8 +34,22 @@ class LinksController < ApplicationController
 
       redirect_to links_path
     else
-      redirect_to new_link_path, alert: "Invalid image URL."
+      redirect_to new_link_path, alert: "Invalid. URL ending must be PNG, JPG, JPEG or GIF."
     end
+  end
+
+  def edit
+    @link = Link.find(params[:id])
+    @action = "update"
+    @what = "Update"
+
+    render :new
+  end
+
+  def update
+    Link.update(params[:id], link_params)
+
+    redirect_to links_path
   end
 
   def destroy
