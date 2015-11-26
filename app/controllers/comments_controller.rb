@@ -17,6 +17,13 @@ class CommentsController < ApplicationController
     redirect_to links_path(anchor: "link_#{params[:link_id]}")
   end
 
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+
+    redirect_to links_path
+  end
+
   private
 
   def comment_params

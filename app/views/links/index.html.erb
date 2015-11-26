@@ -29,11 +29,12 @@
                 <% if !comment.user.name.nil? %>
                   <%= comment.user.name %>:
                 <% elsif !comment.user.nickname.nil? %>
-                  <%= comment.user.nickname %>:
+                  <span><%= comment.user.nickname %>:</span>
                 <% else %>
                   Anonymous:
                 <% end %>
                 <%= comment.comment %>
+                <%= link_to(link_comment_path(link, comment), method: :delete, class: "pull-right") { fa_icon("times") } if comment.user.id == session[:user_id]%>
                 <br>
               <% end %>
             </div>
