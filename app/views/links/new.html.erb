@@ -8,7 +8,7 @@
     <%= flash.alert %>
   <% end %>
   <br>
-  <%= f.submit @what + " Link", class: "btn btn-primary" %>
+  <%= f.submit @what + " Link", class: "btn btn-primary btn-block" %>
 <% end %>
-<%= button_to("Delete Link", link_path(@link), method: "delete", onclick: "return confirm('Are you sure?')", title: "Delete", class: "btn btn-primary") if !@link.id.nil? %>
 </fieldset>
+<%= button_to("Delete Link", link_path(@link), method: "delete", onclick: "return confirm('Are you sure?')", title: "Delete", class: "btn btn-primary btn-block") if !@link.id.nil? %>
