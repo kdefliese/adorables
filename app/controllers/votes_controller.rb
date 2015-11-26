@@ -1,19 +1,26 @@
  class VotesController < ApplicationController
-  def heart
-    unless session[:user_id].nil?
-      vote = Link.find(params[:link_id]).votes.where(user_id: current_user.id)
+  before_filter :authenticate, only: [:create, :update]
 
-      if vote.empty?
-        Vote.create({value: 1, user_id: session[:user_id], link_id: params[:link_id]})
-      elsif vote.first.value == 1
-        Vote.update(vote.first.id, value: 0)
-      elsif vote.first.value == 0
-        Vote.update(vote.first.id, value: 1)
-      end
+  def create
+    Vote.create({value: 1, user_id: session[:user_id], link_id: params[:link_id]})
 
-      redirect_to links_path(anchor: "link_#{params[:link_id]}")
-    else
-      redirect_to root_path, notice: "Please login."
+    redirect_to links_path(anchor: "link_#{params[:link_id]}")
+  end
+
+  def update
+    vote = Vote.find(params[:id])
+    if vote.value == 1
+      vote.update(value: 0)
+    elsif vote.value == 0
+      vote.update(value: 1)
     end
+
+    redirect_to links_path(anchor: "link_#{params[:link_id]}")
+  end
+
+  private
+
+  def authenticate
+    redirect_to root_url, notice: "Please login." if current_user.nil?
   end
 end
