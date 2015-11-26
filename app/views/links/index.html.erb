@@ -1,7 +1,3 @@
-  <div class="btn btn-group">
-  <%= link_to "Most Hearted", links_path(sort: "hearts") %> &hearts;
-  <%= link_to "Newest", links_path %>
-</div>
 <% unless @links.empty? %>
   <div class="row">
     <% @links.each do |link| %>

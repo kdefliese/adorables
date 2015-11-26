@@ -4,8 +4,11 @@ class LinksController < ApplicationController
   before_filter :authenticate, only: [:new]
 
   def index
+    ## for comment form
     @comment = Comment.new
     @action = "create"
+    ##
+    
     if params[:sort] == "hearts"
       links = Link.all.sort_by { |link| link.total_votes }.reverse
       @links = links.paginate(:page => params[:page], :per_page => 5)
