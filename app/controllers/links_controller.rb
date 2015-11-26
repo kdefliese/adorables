@@ -29,12 +29,15 @@ class LinksController < ApplicationController
   end
 
   def create
-    if Link.create(link_params).valid?
-      Link.last.update(user_id: session[:user_id])
-
+    @link = Link.new(link_params)
+    @action = "create"
+    @what = "Add"
+    if @link.save
+      @link.update(user_id: session[:user_id])
       redirect_to links_path
     else
-      redirect_to new_link_path, alert: "Invalid. URL ending must be PNG, JPG, JPEG or GIF."
+      flash[:alert] = "Invalid. URL ending must be PNG, JPG, JPEG or GIF."
+      render :new
     end
   end
 
@@ -47,9 +50,16 @@ class LinksController < ApplicationController
   end
 
   def update
-    Link.update(params[:id], link_params)
-
-    redirect_to links_path
+    @link = Link.find(params[:id])
+    @link.attributes = link_params
+    @action = "update"
+    @what = "Update"
+    if @link.save
+      redirect_to links_path
+    else
+      flash[:alert] = "Invalid. URL ending must be PNG, JPG, JPEG or GIF."
+      render :new
+    end
   end
 
   def destroy
