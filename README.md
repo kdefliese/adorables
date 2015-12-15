@@ -1,6 +1,7 @@
 # adorables
 
-- The internet was made for cute animals. Adorables is a place to share all your favorite cute animal links with your friends. A link a day keeps the sad away!
+### The internet was made for cute animals. Adorables is a place to share all your favorite cute animal links with your friends. A link a day keeps the sad away!
+
 - This application currently uses OAuth with Github (with the omniauth-github gem)
   - Please register your own application with Github and enter the Github Key and Github Secret in the .env file.
     - Don't push the .env file to github. Keep it secret, keep it safe.
