@@ -12,6 +12,13 @@ RSpec.describe SessionsController, type: :controller do
         post :create, provider: :github
       }.to change{ User.count }.by(1)
     end
+    #
+    # TODO: create test for setting nickname
+    # it "should set user nickname to github nickname" do
+    #   expect(user.nickname).to be_nil
+    #   post :create, provider: :github
+    #   expect(user.nickname).to eq (auth["info"]["nickname"])
+    # end
 
     it "should successfully create a session" do
       expect(session[:user_id]).to be_nil
