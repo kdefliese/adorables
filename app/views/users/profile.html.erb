@@ -1,1 +1,30 @@
-<h1>This is my user profile page</h1>
+<div class="row">
+  <h1>Hello, <%= @user.name %>!</h1>
+</div>
+<div class="row">
+  <h3>Your Posts</h3>
+  <% if @user.links.empty? %>
+    You haven't posted anything yet! Would you like to post something adorable?
+  <% else %>
+    You've posted N adorable things! See all your posts
+  <% end %>
+</div>
+<div class="row">
+  <h3>Your Favorites</h3>
+  <% if @user.votes.empty? %>
+    You haven't favorited anything yet! Browse adorables.
+  <% else %>
+    You've favorited N adorable things! See all your favorites
+  <% end %>
+</div>
+<div class="row">
+  <h3>Your Comments</h3>
+  <% if @user.comments.empty? %>
+    You haven't commented on anything yet! Browse adorables.
+  <% else %>
+    You've commented on N adorable things! See all your comments
+  <% end %>
+</div>
+<div class="row">
+  <h3>Recently Hearted</h3>
+</div>
