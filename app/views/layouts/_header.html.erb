@@ -30,7 +30,7 @@
         <li class="navbar-text">
           <% if current_user %>
             <% if !current_user.name.nil? %>
-              <%= current_user.name %>
+              <%= link_to current_user.name, profile_path(current_user), id: "view-profile" %>
             <% elsif !current_user.nickname.nil? %>
               <%= current_user.nickname %>
             <% end %>

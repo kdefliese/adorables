@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  get 'users/profile' => 'users#profile', :as => :profile
+
+
   # resources :comments
 
   # The priority is based upon order of creation: first created -> highest priority.
