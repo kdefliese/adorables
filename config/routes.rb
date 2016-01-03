@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'users/profile' => 'users#profile', :as => :profile
   get 'users/links' => 'links#user_links', :as => :user_links
   get 'users/hearts' => 'links#user_votes', :as => :user_votes
+  get 'users/comments' => 'links#user_comments', :as => :user_comments
 
 
   # resources :comments
