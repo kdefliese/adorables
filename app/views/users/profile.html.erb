@@ -3,26 +3,32 @@
 </div>
 <div class="row">
   <h3>Your Adorables</h3>
-  <% if @user.links.empty? %>
+  <% if @links.empty? %>
     You haven't posted anything yet! Would you like to <%= link_to "post something adorable", new_link_path %>?
+  <% elsif @links.count == 1 %>
+    You've posted <%= @links.count %> adorable thing! See your link
   <% else %>
-    You've posted <%= @user.links.count %> adorable things! See all your links
+    You've posted <%= @links.count %> adorable things! See all your links
   <% end %>
 </div>
 <div class="row">
   <h3>Your Favorites</h3>
-  <% if @user.votes.empty? %>
+  <% if @votes.empty? %>
     You haven't favorited anything yet! <%= link_to "Browse adorables", root_path %>
+  <% elsif @votes.count == 1 %>
+    You've favorited <%= @votes.count %> adorable thing! See your favorite
   <% else %>
-    You've favorited <%= @user.votes.count %> adorable things! See all your favorites
+    You've favorited <%= @votes.count %> adorable things! See all your favorites
   <% end %>
 </div>
 <div class="row">
   <h3>Your Comments</h3>
-  <% if @user.comments.empty? %>
+  <% if @comments.empty? %>
     You haven't commented on anything yet! <%= link_to "Browse adorables", root_path %> (maybe add some random suggestions here?)
+  <% elsif @comments.count == 1 %>
+    You've commented on <%= @comments.count %> adorable thing! See your comment
   <% else %>
-    You've commented on <%= @user.comments.count %> adorable things! See all your comments
+    You've commented on <%= @comments.count %> adorable things! See all your comments
   <% end %>
 </div>
 <div class="row">
