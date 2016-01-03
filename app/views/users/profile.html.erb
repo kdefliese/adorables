@@ -8,7 +8,7 @@
   <% elsif @links.count == 1 %>
     You've posted <%= @links.count %> adorable thing! <%= link_to "See your link", link_path(@links.first.id) %>
   <% else %>
-    You've posted <%= @links.count %> adorable things! See all your links
+    You've posted <%= @links.count %> adorable things! <%= link_to "See all your links", user_links_path %>
   <% end %>
 </div>
 <div class="row">
@@ -16,9 +16,9 @@
   <% if @votes.empty? %>
     You haven't favorited anything yet! <%= link_to "Browse adorables", root_path %>
   <% elsif @votes.count == 1 %>
-    You've favorited <%= @votes.count %> adorable thing! See your favorite
+    You've favorited <%= @votes.count %> adorable thing! <%= link_to "See your favorite", link_path(@votes.first.link_id) %>
   <% else %>
-    You've favorited <%= @votes.count %> adorable things! See all your favorites
+    You've favorited <%= @votes.count %> adorable things! <%= link_to "See all your favorites", user_votes_path %>
   <% end %>
 </div>
 <div class="row">

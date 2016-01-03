@@ -2,16 +2,15 @@ require 'will_paginate/array'
 
 class LinksController < ApplicationController
   before_filter :authenticate, only: [:new, :edit]
-  before_filter :populate_comment_form, only: [:index, :show, :user_links]
+  before_filter :populate_comment_form, only: [:index, :show, :user_links, :user_votes]
 
   def index
     if params[:sort] == "hearts"
       links = Link.all.sort_by { |link| link.total_votes }.reverse
-      @links = links.paginate(:page => params[:page], :per_page => 5)
     else
       links = Link.all.reverse
-      @links = links.paginate(:page => params[:page], :per_page => 5)
     end
+    @links = links.paginate(:page => params[:page], :per_page => 5)
   end
 
   def show
@@ -21,11 +20,25 @@ class LinksController < ApplicationController
   def user_links
     if params[:sort] == "hearts"
       links = current_user.links.sort_by { |link| link.total_votes }.reverse
-      @links = links.paginate(:page => params[:page], :per_page => 5)
     else
       links = current_user.links.reverse
-      @links = links.paginate(:page => params[:page], :per_page => 5)
     end
+    @links = links.paginate(:page => params[:page], :per_page => 5)
+    render :index
+  end
+
+  def user_votes
+    votes = current_user.votes
+    link_ids = []
+    votes.each do |vote|
+      link_ids.push(vote.link_id)
+    end
+    if params[:sort] == "hearts"
+      links = Link.find(link_ids).sort_by { |link| link.total_votes }.reverse
+    else
+      links = Link.find(link_ids).reverse
+    end
+    @links = links.paginate(:page => params[:page], :per_page => 5)
     render :index
   end
 
