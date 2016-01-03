@@ -2,13 +2,9 @@ require 'will_paginate/array'
 
 class LinksController < ApplicationController
   before_filter :authenticate, only: [:new, :edit]
+  before_filter :populate_comment_form, only: [:index, :show, :user_links]
 
   def index
-    ## for comment form
-    @comment = Comment.new
-    @action = "create"
-    ##
-
     if params[:sort] == "hearts"
       links = Link.all.sort_by { |link| link.total_votes }.reverse
       @links = links.paginate(:page => params[:page], :per_page => 5)
@@ -20,17 +16,9 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
-    ## for comment form
-    @comment = Comment.new
-    @action = "create"
-    ##
   end
 
   def user_links
-    ## for comment form
-    @comment = Comment.new
-    @action = "create"
-    ##
     if params[:sort] == "hearts"
       links = current_user.links.sort_by { |link| link.total_votes }.reverse
       @links = links.paginate(:page => params[:page], :per_page => 5)
@@ -96,5 +84,12 @@ class LinksController < ApplicationController
 
   def authenticate
     redirect_to root_url, notice: "Please login." if current_user.nil?
+  end
+
+  def populate_comment_form
+    ## for comment form
+    @comment = Comment.new
+    @action = "create"
+    ##
   end
 end
