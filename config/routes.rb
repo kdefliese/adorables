@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   end
 
   get 'users/profile' => 'users#profile', :as => :profile
-  get 'users/links' => 'links#user_links', :as => :user_links
-  get 'users/hearts' => 'links#user_votes', :as => :user_votes
-  get 'users/comments' => 'links#user_comments', :as => :user_comments
+  get 'users/links' => 'users#user_links', :as => :user_links
+  get 'users/hearts' => 'users#user_votes', :as => :user_votes
+  get 'users/comments' => 'users#user_comments', :as => :user_comments
 
 
   # resources :comments
