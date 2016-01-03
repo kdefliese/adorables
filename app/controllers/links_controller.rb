@@ -20,6 +20,18 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    ## for comment form
+    @comment = Comment.new
+    @action = "create"
+    ##
+  end
+
+  def your_links
+    ## for comment form
+    @comment = Comment.new
+    @action = "create"
+    ##
+    @links = current_user.links
   end
 
   def new

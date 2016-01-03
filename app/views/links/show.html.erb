@@ -1,0 +1,57 @@
+<div class="row">
+  <div id=<%= "link_#{@link.id}" %> class="panel panel-default">
+    <div class="panel-heading">
+      <h6 class="panel-title">
+        Submitted <%= time_ago_in_words(@link.created_at) %> ago
+        <% if !@link.user.name.nil? %>
+          by <%= @link.user.name %>
+        <% elsif !@link.user.nickname.nil? %>
+          by <%= @link.user.nickname %>
+        <% else %>
+          by Anonymous
+        <% end %>
+      </h6>
+    </div>
+    <%= link_to(edit_link_path(@link), title: "Edit", class: "btn pull-right") { fa_icon("pencil-square-o lg") } if @link.user_id == session[:user_id] %>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        <%# link_to(image_tag(link.url, class: "img-responsive"), link_path(link))%>
+        <%= image_tag(@link.url, class: "img-responsive") %>
+        <div class="caption">
+          <div class="comments">
+            <div><%= @link.total_votes %> hearts</div>
+            <% if @link.title %>
+              <h4><%= @link.title %></h4>
+            <% end %>
+            <% @link.comments.each do |comment| %>
+              <% if !comment.user.name.nil? %>
+                <%= comment.user.name %>:
+              <% elsif !comment.user.nickname.nil? %>
+                <span><%= comment.user.nickname %>:</span>
+              <% else %>
+                Anonymous:
+              <% end %>
+              <%= comment.comment %>
+              <%= link_to(link_comment_path(@link, comment), method: :delete, class: "pull-right") { fa_icon("times") } if comment.user.id == session[:user_id]%>
+              <br>
+            <% end %>
+          </div>
+          <% unless session[:user_id].nil? || @link.votes.empty? %>
+            <% unless @link.votes.where(user_id: session[:user_id]).empty? %>
+              <% if @link.votes.where(user_id: session[:user_id]).first.value == 1 %>
+                <%= link_to(link_vote_path(@link, @link.votes.where(user_id: session[:user_id]).first), method: :patch, class: "btn pull-left") { fa_icon("heart 2x") } %>
+              <% else %>
+                <%= link_to(link_vote_path(@link, @link.votes.where(user_id: session[:user_id]).first), method: :patch, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
+              <% end %>
+            <% else %>
+              <%= link_to(link_votes_path(@link), method: :post, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
+            <% end %>
+          <% else %>
+            <%= link_to(link_votes_path(@link), method: :post, class: "btn pull-left") { fa_icon("heart-o 2x") } %>
+          <% end %>
+          <%= render "/comments/new", :@link_id => @link.id%>
+        </div>
+      </div>
+    </div>
+  </div>
+<div>

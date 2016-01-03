@@ -6,7 +6,7 @@
   <% if @links.empty? %>
     You haven't posted anything yet! Would you like to <%= link_to "post something adorable", new_link_path %>?
   <% elsif @links.count == 1 %>
-    You've posted <%= @links.count %> adorable thing! See your link
+    You've posted <%= @links.count %> adorable thing! <%= link_to "See your link", link_path(@links.first.id) %>
   <% else %>
     You've posted <%= @links.count %> adorable things! See all your links
   <% end %>
