@@ -26,9 +26,9 @@
   <% if @comments.empty? %>
     You haven't commented on anything yet! <%= link_to "Browse adorables", root_path %> (maybe add some random suggestions here?)
   <% elsif @comments.count == 1 %>
-    You've commented on <%= @comments.count %> adorable thing! <%= link_to "See the link you've commented on", link_path(@comments.first.link_id) %>
+    You've made a comment on an adorable thing! <%= link_to "See the link you've commented on", link_path(@comments.first.link_id) %>
   <% else %>
-    You've commented on <%= @comments.count %> adorable things! <%= link_to "See all links you've commented on", user_comments_path %>
+    You've made <%= @comments.count %> comments on adorable things! <%= link_to "See all links you've commented on", user_comments_path %>
   <% end %>
 </div>
 <div class="row">
