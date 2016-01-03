@@ -26,12 +26,19 @@ class LinksController < ApplicationController
     ##
   end
 
-  def your_links
+  def user_links
     ## for comment form
     @comment = Comment.new
     @action = "create"
     ##
-    @links = current_user.links
+    if params[:sort] == "hearts"
+      links = current_user.links.sort_by { |link| link.total_votes }.reverse
+      @links = links.paginate(:page => params[:page], :per_page => 5)
+    else
+      links = current_user.links.reverse
+      @links = links.paginate(:page => params[:page], :per_page => 5)
+    end
+    render :index
   end
 
   def new

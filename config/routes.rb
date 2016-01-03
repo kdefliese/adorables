@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/profile' => 'users#profile', :as => :profile
+  get 'users/links' => 'links#user_links', :as => :user_links
 
 
   # resources :comments
