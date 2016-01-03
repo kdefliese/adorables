@@ -2,27 +2,27 @@
   <h1>Hello, <%= @user.name %>!</h1>
 </div>
 <div class="row">
-  <h3>Your Posts</h3>
+  <h3>Your Adorables</h3>
   <% if @user.links.empty? %>
-    You haven't posted anything yet! Would you like to post something adorable?
+    You haven't posted anything yet! Would you like to <%= link_to "post something adorable", new_link_path %>?
   <% else %>
-    You've posted N adorable things! See all your posts
+    You've posted <%= @user.links.count %> adorable things! See all your links
   <% end %>
 </div>
 <div class="row">
   <h3>Your Favorites</h3>
   <% if @user.votes.empty? %>
-    You haven't favorited anything yet! Browse adorables.
+    You haven't favorited anything yet! <%= link_to "Browse adorables", root_path %>
   <% else %>
-    You've favorited N adorable things! See all your favorites
+    You've favorited <%= @user.votes.count %> adorable things! See all your favorites
   <% end %>
 </div>
 <div class="row">
   <h3>Your Comments</h3>
   <% if @user.comments.empty? %>
-    You haven't commented on anything yet! Browse adorables.
+    You haven't commented on anything yet! <%= link_to "Browse adorables", root_path %> (maybe add some random suggestions here?)
   <% else %>
-    You've commented on N adorable things! See all your comments
+    You've commented on <%= @user.comments.count %> adorable things! See all your comments
   <% end %>
 </div>
 <div class="row">
