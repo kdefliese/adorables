@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = current_user
     @links = current_user.links
     @comments = current_user.comments
-    @votes = current_user.votes
+    @votes = current_user.votes.where(value: 1)
   end
 
 end
